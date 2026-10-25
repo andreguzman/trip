@@ -134,6 +134,21 @@
               <span class="truncate">{{ t('modals.place.visited') }}</span>
             </button>
 
+            <button (click)="toggleCheckbox('hidden')"
+              class="select-none cursor-pointer inline-flex items-center gap-2 h-8 w-24 max-w-[25vw] px-3 rounded-lg text-sm font-medium transition-all"
+              [class]="
+              placeForm.get('hidden')?.value
+                ? 'bg-amber-500 text-white'
+                : 'bg-primary-100 dark:bg-black text-primary-700 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-800'
+            ">
+              @if (placeForm.get('hidden')?.value) {
+              <i class="pi pi-check text-xs"></i>
+              } @else {
+              <i class="pi pi-eye-slash text-xs"></i>
+              }
+              <span class="truncate">{{ t('modals.place.hidden') }}</span>
+            </button>
+
             <div class="flex items-center gap-2">
               @if (placeForm.get('gpx')?.value) {
               <p-button icon="pi pi-check"

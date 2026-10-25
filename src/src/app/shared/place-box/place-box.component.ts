@@ -16,6 +16,7 @@ export class PlaceBoxComponent {
   @Output() editEmitter = new EventEmitter<void>();
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() visitEmitter = new EventEmitter<void>();
+  @Output() hideEmitter = new EventEmitter<void>();
   @Output() favoriteEmitter = new EventEmitter<void>();
   @Output() gpxEmitter = new EventEmitter<void>();
   @Output() closeEmitter = new EventEmitter<void>();
@@ -25,6 +26,10 @@ export class PlaceBoxComponent {
 
   visitPlace() {
     this.visitEmitter.emit();
+  }
+
+  hidePlace() {
+    this.hideEmitter.emit();
   }
 
   favoritePlace() {

@@ -326,6 +326,7 @@ class UserBase(SQLModel):
     mode_dark: bool | None = False
     mode_gpx_in_place: bool | None = False
     mode_display_visited: bool | None = False
+    mode_minimize_hidden: bool | None = False
     mode_map_position: bool | None = False
     show_dog_tag: bool | None = True
     fetch_link_titles: bool | None = False
@@ -424,6 +425,7 @@ class UserRead(UserBase):
             mode_dark=obj.mode_dark,
             mode_gpx_in_place=obj.mode_gpx_in_place,
             mode_display_visited=obj.mode_display_visited,
+            mode_minimize_hidden=obj.mode_minimize_hidden,
             mode_map_position=obj.mode_map_position,
             show_dog_tag=obj.show_dog_tag,
             fetch_link_titles=obj.fetch_link_titles,
@@ -533,6 +535,7 @@ class PlaceBase(SQLModel):
     duration: int | None = None
     favorite: bool | None = None
     visited: bool | None = None
+    hidden: bool | None = None
     gpx: str | None = None
     restroom: bool | None = None
     links: list[str] | None = None
@@ -595,6 +598,7 @@ class PlaceRead(PlaceBase):
             price=obj.price,
             duration=obj.duration,
             visited=obj.visited,
+            hidden=obj.hidden,
             image=_prefix_assets_url(obj.image.filename) if obj.image else None,
             image_id=obj.image_id,
             favorite=obj.favorite,

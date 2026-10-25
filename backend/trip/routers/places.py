@@ -48,6 +48,7 @@ async def create_place(
         duration=place.duration,
         category_id=place.category_id,
         visited=place.visited,
+        hidden=place.hidden,
         restroom=place.restroom,
         user=current_user,
         links=links,

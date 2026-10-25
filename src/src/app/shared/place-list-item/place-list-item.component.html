@@ -36,6 +36,13 @@
               ">
           <i class="pi" style="font-size: 12px" [class]="place.visited ? 'pi-eye' : 'pi-eye-slash'"></i>
         </span>
+
+        @if (place.hidden) {
+        <span
+          class="flex items-center gap-0.5 px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">
+          <i class="pi pi-eye-slash" style="font-size: 12px"></i>
+        </span>
+        }
         }
 
         <span [style.--color-bg-opacity]="place.category.color"

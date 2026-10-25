@@ -25,7 +25,8 @@ Click on any place bubble to view its details. The action bar provides the follo
 - Open directions to the place if it has coordinates
 - Fly to place
 - Display GPX trace (if the place includes a GPX file)
-- Mark as visited (toggles visibility by default, marks the place as done)
+- Mark as visited (marks the place as done and grays out its map marker; visited places stay on the map)
+- Hide place (removes the place from the map and lists; with the "Show Hidden Places as Dots" setting it is minimized to a small dot instead. Use the "Hidden" quick filter to reveal them again)
 - Mark as favorite (adds a star icon to the bubble)
 - Delete the place
 - Edit the place

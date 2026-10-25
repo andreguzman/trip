@@ -41,11 +41,13 @@ export class PlaceBoxContentComponent {
   @Input() showButtons: boolean = true;
   @Input() showMeta: boolean = true;
   @Input() editableLinks: boolean = false;
+  @Input() enableHide: boolean = false;
   tooltipCopied = signal(false);
 
   @Output() editEmitter = new EventEmitter<void>();
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() visitEmitter = new EventEmitter<void>();
+  @Output() hideEmitter = new EventEmitter<void>();
   @Output() favoriteEmitter = new EventEmitter<void>();
   @Output() gpxEmitter = new EventEmitter<void>();
   @Output() closeEmitter = new EventEmitter<void>();
@@ -85,6 +87,18 @@ export class PlaceBoxContentComponent {
         iconClass: 'text-green-500!',
         command: () => this.visitPlace(),
       },
+      ...(this.enableHide
+        ? [
+            {
+              label: this.selectedPlace?.hidden
+                ? this.translocoService.translate('placebox.unhide_place')
+                : this.translocoService.translate('placebox.hide_place'),
+              icon: this.selectedPlace?.hidden ? 'pi pi-eye' : 'pi pi-eye-slash',
+              iconClass: 'text-amber-500!',
+              command: () => this.hidePlace(),
+            },
+          ]
+        : []),
       {
         label: this.translocoService.translate('placebox.fly_to_place'),
         icon: 'pi pi-expand',
@@ -125,6 +139,12 @@ export class PlaceBoxContentComponent {
   visitPlace() {
     this.visitEmitter.emit();
     this.selectedPlace!.visited = !this.selectedPlace?.visited;
+    this.buildMenu();
+  }
+
+  hidePlace() {
+    this.hideEmitter.emit();
+    this.selectedPlace!.hidden = !this.selectedPlace?.hidden;
     this.buildMenu();
   }
 

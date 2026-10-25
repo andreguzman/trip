@@ -175,11 +175,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   isLowNetMode = signal(false);
   isGPXInPlaceMode = signal(false);
-  isVisitedMode = signal(false);
+  isHiddenMinimizeMode = signal(false);
   isMapPositionMode = signal(false);
   isDogTagMode = signal(true);
   isFetchLinkTitlesMode = signal(false);
   filter_display_visited = signal(false);
+  filter_display_hidden = signal(false);
   filter_display_favorite_only = signal(false);
   filter_display_restroom = signal(false);
   filter_dog_only = signal(false);
@@ -222,9 +223,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   filteredPlaces = computed(() => {
     const places = this.places();
     const activeCategories = this.activeCategories();
-    const isVisitedMode = this.isVisitedMode();
+    const isHiddenMinimizeMode = this.isHiddenMinimizeMode();
+    const selectedId = this.selectedPlaceId();
     const filters = {
       visited: this.filter_display_visited(),
+      hidden: this.filter_display_hidden(),
       favorite: this.filter_display_favorite_only(),
       restroom: this.filter_display_restroom(),
       dog: this.filter_dog_only(),
@@ -232,7 +235,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     return places.filter(
       (p) =>
-        (filters.visited || isVisitedMode || !p.visited) &&
+        (filters.hidden || isHiddenMinimizeMode || !p.hidden || p.id === selectedId) &&
+        (!filters.visited || p.visited) &&
         (!filters.favorite || p.favorite) &&
         (!filters.restroom || p.restroom) &&
         (!filters.dog || p.allowdog) &&
@@ -411,10 +415,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     effect(() => {
       const placesToDisplay = this.mapDisplayPlaces();
       // triggers
-      const isVisitedMode = this.isVisitedMode();
-      const isVisitedFilter = this.filter_display_visited();
+      const isHiddenMinimizeMode = this.isHiddenMinimizeMode();
+      const isHiddenFilter = this.filter_display_hidden();
       const isLowNetMode = this.isLowNetMode();
       const isGPXInPlaceMode = this.isGPXInPlaceMode();
+      // selected place is exempt from hidden filtering/minimizing while its box is open
+      this.selectedPlaceId();
 
       untracked(() => {
         if (!this.map || !this.markerClusterGroup) return;
@@ -477,7 +483,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.settings.set(settings);
           this.isLowNetMode.set(!!settings.mode_low_network);
           this.isGPXInPlaceMode.set(!!settings.mode_gpx_in_place);
-          this.isVisitedMode.set(!!settings.mode_display_visited);
+          this.isHiddenMinimizeMode.set(!!settings.mode_minimize_hidden);
           this.isMapPositionMode.set(!!settings.mode_map_position);
           this.isDogTagMode.set(settings.show_dog_tag !== false);
           this.isFetchLinkTitlesMode.set(!!settings.fetch_link_titles);
@@ -542,7 +548,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const isLowNet = this.isLowNetMode();
     const isGpxMode = this.isGPXInPlaceMode();
 
-    const shouldBeDot = (p: Place) => p.visited && this.isVisitedMode() && !this.filter_display_visited();
+    const shouldBeDot = (p: Place) =>
+      !!p.hidden && this.isHiddenMinimizeMode() && !this.filter_display_hidden() && p.id !== this.selectedPlaceId();
 
     const newPlacesMap = new Map(newPlaces.map((p) => [p.id, p]));
     const toRemove = currentLayers.filter((layer) => {
@@ -552,6 +559,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       const currentIsDot = layer.options.isDot;
       if (targetIsDot !== currentIsDot) return true;
       if (!targetIsDot) {
+        if (layer.options.createdVisited !== !!p.visited) return true;
         if (layer.options.createdLowNet !== isLowNet) return true;
         if (layer.options.createdGpxMode !== isGpxMode) return true;
         if (layer.options.imageId !== p.image_id) return true;
@@ -574,6 +582,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         Object.assign(marker.options, {
           placeId: p.id,
           isDot: isSupposedToBeDot,
+          createdVisited: !!p.visited,
           createdLowNet: isLowNet,
           createdGpxMode: isGpxMode,
           category: p.category,
@@ -614,6 +623,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   resetFilters() {
     this.filter_display_visited.set(false);
+    this.filter_display_hidden.set(false);
     this.filter_dog_only.set(false);
     this.filter_display_favorite_only.set(false);
     this.filter_display_restroom.set(false);
@@ -809,6 +819,26 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         },
         error: () => {
           this.updatePlaceInList(selected.id, { visited: previousVisited });
+        },
+      });
+  }
+
+  hidePlace() {
+    const selected = this.selectedPlace();
+    if (!selected) return;
+
+    const previousHidden = selected.hidden;
+    const hiddenBool = !previousHidden;
+    this.apiService
+      .putPlace(selected.id, { hidden: hiddenBool })
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.updatePlaceInList(selected.id, { hidden: hiddenBool });
+          if (hiddenBool) this.selectedPlaceId.set(null); // close the box so the place can disappear
+        },
+        error: () => {
+          this.updatePlaceInList(selected.id, { hidden: previousHidden });
         },
       });
   }
@@ -1051,7 +1081,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.settings.set(resp.settings);
           this.isLowNetMode.set(!!resp.settings.mode_low_network);
           this.isGPXInPlaceMode.set(!!resp.settings.mode_gpx_in_place);
-          this.isVisitedMode.set(!!resp.settings.mode_display_visited);
+          this.isHiddenMinimizeMode.set(!!resp.settings.mode_minimize_hidden);
           this.isMapPositionMode.set(!!resp.settings.mode_map_position);
           this.isDogTagMode.set(resp.settings.show_dog_tag !== false);
           this.isFetchLinkTitlesMode.set(!!resp.settings.fetch_link_titles);
@@ -1396,9 +1426,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
   }
 
-  toggleVisitedDisplayed() {
+  toggleHiddenMinimize() {
     this.apiService
-      .putSettings({ mode_display_visited: this.isVisitedMode() })
+      .putSettings({ mode_minimize_hidden: this.isHiddenMinimizeMode() })
       .pipe(take(1))
       .subscribe({
         next: () =>

@@ -105,6 +105,7 @@ export class PlaceCreateModalComponent {
       allowdog: false,
       restroom: false,
       visited: false,
+      hidden: false,
       image: null,
       image_id: null,
       gpx: null,

@@ -122,6 +122,7 @@
   "dashboard": {
     "title": "Filters",
     "quick_filters": "Snelle filters",
+    "hidden": "Verborgen",
     "favorites": "Favorieten",
     "show_out_of_bounds": "Locaties buiten kaart verbergen",
     "nothing_to_see": "Niets te zien",
@@ -199,6 +200,8 @@
     "link_titles_desc": "Haal de paginatitel van elke link op en toon deze in plaats van de ruwe URL",
     "always_display_visited": "Bezochte locaties tonen",
     "always_display_visited_desc": "Toon bezochte locaties altijd als kleine puntjes",
+    "minimize_hidden": "Verborgen plekken als punten tonen",
+    "minimize_hidden_desc": "Toon verborgen plekken als kleine punten in plaats van ze volledig te verbergen",
     "currency_desc": "Werk de standaardvaluta bij",
     "duplicate_dist": "Drempel duplicaatafstand",
     "duplicate_dist_desc": "Bepaal hoe nauw strings moeten overeenkomen. Hogere waarden accepteren meer verschillen; 0 om uit te schakelen",
@@ -667,7 +670,8 @@
       "place_hint": "Ondersteunt google.com/maps/place/ en [https://maps.app.goo.gl](https://maps.app.goo.gl) (Google API-sleutel vereist)",
       "query_tooltip": "Aanvullen via Provider API",
       "toilets": "Toiletten",
-      "visited": "Bezocht"
+      "visited": "Bezocht",
+      "hidden": "Verborgen"
     },
     "places": {
       "empty": {
@@ -758,6 +762,8 @@
     "open_navigation": "Openen in navigatie",
     "fly_to_place": "Naar locatie vliegen",
     "mark_visited": "Markeren als bezocht",
+    "hide_place": "Verberg plek",
+    "unhide_place": "Toon plek",
     "mark_not_visited": "Markeren als niet bezocht",
     "mark_favorite": "Markeren als favoriet",
     "mark_not_favorite": "Markeren als niet favoriet",

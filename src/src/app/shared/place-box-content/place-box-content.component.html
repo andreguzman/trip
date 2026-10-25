@@ -66,6 +66,10 @@
           <p-button (click)="flyToPlace()" [pTooltip]="t('fly_to_place')" text icon="pi pi-expand" />
           <p-button (click)="visitPlace()" [pTooltip]="t('mark_visited')" styleClass="text-green-500!" text
             [icon]="selectedPlace.visited ? 'pi pi-check-circle' : 'pi pi-check'" />
+          @if (enableHide) {
+          <p-button (click)="hidePlace()" [pTooltip]="selectedPlace.hidden ? t('unhide_place') : t('hide_place')"
+            styleClass="text-amber-500!" text [icon]="selectedPlace.hidden ? 'pi pi-eye' : 'pi pi-eye-slash'" />
+          }
           <p-button (click)="favoritePlace()" [pTooltip]="t('mark_favorite')" styleClass="text-rose-500!" text
             [icon]="selectedPlace.favorite ? 'pi pi-heart-fill' : 'pi pi-heart'" />
           <p-button (click)="deletePlace()" [pTooltip]="t('delete')" severity="danger" text icon="pi pi-trash" />

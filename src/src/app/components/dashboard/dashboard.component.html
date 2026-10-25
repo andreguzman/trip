@@ -9,6 +9,7 @@
   @if (selectedPlace()) {
   <app-place-box [selectedPlace]="selectedPlace()" (deleteEmitter)="deletePlace()" (editEmitter)="editPlace()"
     (favoriteEmitter)="favoritePlace()" (gpxEmitter)="getPlaceGPX()" (visitEmitter)="visitPlace()"
+    (hideEmitter)="hidePlace()"
     (closeEmitter)="closePlaceBox()" (openNavigationEmitter)="toNavigation()" (flyToEmitter)="flyTo()"
     (linksUpdated)="onPlaceLinksUpdated($event)"></app-place-box>
   }
@@ -164,6 +165,21 @@
             <i class="pi pi-eye text-xs"></i>
             }
             <span class="truncate">{{ t('modals.place.visited') }}</span>
+          </button>
+
+          <button (click)="filter_display_hidden.set(!filter_display_hidden())"
+            class="cursor-pointer inline-flex items-center gap-2 h-8 px-3 rounded-lg text-sm font-medium transition-all"
+            [class]="
+              filter_display_hidden()
+                ? 'bg-amber-500 text-white'
+                : 'bg-primary-100 dark:bg-black text-primary-700 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-800'
+            ">
+            @if (filter_display_hidden()) {
+            <i class="pi pi-check text-xs"></i>
+            } @else {
+            <i class="pi pi-eye-slash text-xs"></i>
+            }
+            <span class="truncate">{{ t('dashboard.hidden') }}</span>
           </button>
 
           <button (click)="filter_display_favorite_only.set(!filter_display_favorite_only())"
@@ -824,15 +840,15 @@
                       <div
                         class="flex items-center justify-between py-3 px-4 rounded-lg bg-primary-50 dark:bg-black/50 border border-primary-100 dark:border-primary-700">
                         <div class="flex items-center gap-3 min-w-0 flex-1">
-                          <i class="pi pi-eye text-indigo-600 dark:text-indigo-400 shrink-0"></i>
+                          <i class="pi pi-eye-slash text-indigo-600 dark:text-indigo-400 shrink-0"></i>
                           <div class="min-w-0">
                             <span class="font-medium text-sm text-primary-900 dark:text-primary-100 block">{{
-                              t('settings.always_display_visited') }}</span>
+                              t('settings.minimize_hidden') }}</span>
                             <p class="text-xs text-primary-500 dark:text-primary-400 hidden lg:block">{{
-                              t('settings.always_display_visited_desc') }}</p>
+                              t('settings.minimize_hidden_desc') }}</p>
                           </div>
                         </div>
-                        <p-toggleswitch [(ngModel)]="isVisitedMode" (onChange)="toggleVisitedDisplayed()"
+                        <p-toggleswitch [(ngModel)]="isHiddenMinimizeMode" (onChange)="toggleHiddenMinimize()"
                           class="shrink-0 ml-4" />
                       </div>
 

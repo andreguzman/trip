@@ -182,6 +182,7 @@
     "find_nearby": "Trouver des places à proximité (API Google)",
     "nothing_to_see": "Rien à voir",
     "quick_filters": "Filtres rapides",
+    "hidden": "Masqués",
     "select_all": "Tout sélectionner",
     "set_current": "Définir comme actuel",
     "show_out_of_bounds": "Masquer les places hors limites",
@@ -456,7 +457,8 @@
       "place_hint": "Prend en charge google.com/maps/place/ et [https://maps.app.goo.gl](https://maps.app.goo.gl) (Clé API Google requise)",
       "query_tooltip": "Compléter via l'API du fournisseur",
       "toilets": "Toilettes",
-      "visited": "Visité"
+      "visited": "Visité",
+      "hidden": "Masqué"
     },
     "places": {
       "empty": {
@@ -543,6 +545,8 @@
     "mark_not_favorite": "Marquer comme non favori",
     "mark_not_visited": "Marquer comme non visité",
     "mark_visited": "Marquer comme visité",
+    "hide_place": "Masquer le lieu",
+    "unhide_place": "Afficher le lieu",
     "no": "Non",
     "open_navigation": "Ouvrir dans Navigation",
     "place": "Place",
@@ -573,6 +577,8 @@
     "allow_registration": "Autoriser les utilisateurs à s'inscrire eux-mêmes",
     "always_display_visited": "Afficher les places visitées",
     "always_display_visited_desc": "Toujours afficher les places visitées sous forme de petits points",
+    "minimize_hidden": "Afficher les lieux masqués en points",
+    "minimize_hidden_desc": "Afficher les lieux masqués sous forme de petits points au lieu de les masquer complètement",
     "api_key": "Clé API TRIP",
     "api_key_desc": "Utilisez-la pour vous authentifier dans vos scripts",
     "apprise_webhook": "Webhook Apprise",
