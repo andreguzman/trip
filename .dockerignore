@@ -1,0 +1,12 @@
+.git
+.gitignore
+.github
+docs
+mcp-server
+storage
+**/node_modules
+**/dist
+**/__pycache__
+*.sqlite
+*.sqlite-wal
+**/.angular
