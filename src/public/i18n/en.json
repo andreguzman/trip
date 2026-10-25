@@ -547,6 +547,8 @@
     "mark_visited": "Mark as visited",
     "hide_place": "Hide place",
     "unhide_place": "Unhide place",
+    "share_place": "Share place",
+    "link_copied": "Link copied to clipboard",
     "no": "No",
     "open_navigation": "Open in Navigation",
     "place": "Place",

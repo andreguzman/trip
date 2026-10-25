@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MarkdownPipe } from '../pipes/markdown.pipe';
 import { TooltipModule } from 'primeng/tooltip';
-import { ClipboardModule } from '@angular/cdk/clipboard';
+import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
 import { NaturalDurationPipe } from '../pipes/naturalduration.pipe';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { LinkChipComponent } from '../link-chip/link-chip.component';
@@ -42,7 +42,10 @@ export class PlaceBoxContentComponent {
   @Input() showMeta: boolean = true;
   @Input() editableLinks: boolean = false;
   @Input() enableHide: boolean = false;
+  @Input() enableShare: boolean = false;
   tooltipCopied = signal(false);
+  shareCopied = signal(false);
+  private clipboard = inject(Clipboard);
 
   @Output() editEmitter = new EventEmitter<void>();
   @Output() deleteEmitter = new EventEmitter<void>();
@@ -99,6 +102,16 @@ export class PlaceBoxContentComponent {
             },
           ]
         : []),
+      ...(this.enableShare
+        ? [
+            {
+              label: this.translocoService.translate('placebox.share_place'),
+              icon: 'pi pi-share-alt',
+              iconClass: 'text-blue-500!',
+              command: () => this.sharePlace(),
+            },
+          ]
+        : []),
       {
         label: this.translocoService.translate('placebox.fly_to_place'),
         icon: 'pi pi-expand',
@@ -146,6 +159,20 @@ export class PlaceBoxContentComponent {
     this.hideEmitter.emit();
     this.selectedPlace!.hidden = !this.selectedPlace?.hidden;
     this.buildMenu();
+  }
+
+  get shareUrl(): string {
+    return this.selectedPlace ? `${window.location.origin}/home?pid=${this.selectedPlace.id}` : '';
+  }
+
+  sharePlace() {
+    if (!this.shareUrl) return;
+    // CDK Clipboard falls back to execCommand('copy') on plain-HTTP LAN origins (no secure context)
+    Promise.resolve(this.clipboard.copy(this.shareUrl)).then((ok) => {
+      if (!ok) return;
+      this.shareCopied.set(true);
+      setTimeout(() => this.shareCopied.set(false), 1200);
+    });
   }
 
   favoritePlace() {
