@@ -151,6 +151,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   places = signal<Place[]>([]);
   categories = signal<Category[]>([]);
   selectedPlaceId = signal<number | null>(null);
+  private deepLinkFlyPending = false;
   selectedPlaceGPX = signal<Place | null>(null);
   settings = signal<Settings | null>(null);
   backups = signal<Backup[]>([]);
@@ -430,6 +431,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     effect(() => {
       const id = this.selectedPlaceId();
+      const places = this.places();
+      if (!this.deepLinkFlyPending || !id || !places.length || !this.map) return;
+      const p = places.find((x) => x.id === id);
+      if (!p) return;
+      this.deepLinkFlyPending = false;
+      this.map.flyTo([p.lat, p.lng], Math.max(this.map.getZoom() || 13, 15), { duration: 2 });
+    });
+
+    effect(() => {
+      const id = this.selectedPlaceId();
 
       if (this.selectedMarkerElement) {
         this.selectedMarkerElement.classList.remove('list-hover');
@@ -604,7 +615,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const zoom = isMapPosMode && queryParams['z'] ? parseInt(queryParams['z'], 10) : this.map?.getZoom() || 13;
 
     const placeId = queryParams['pid'];
-    if (placeId) requestAnimationFrame(() => this.selectedPlaceId.set(+placeId));
+    if (placeId) {
+      this.deepLinkFlyPending = true;
+      requestAnimationFrame(() => this.selectedPlaceId.set(+placeId));
+    }
     return { lat, lng, zoom };
   }
 
