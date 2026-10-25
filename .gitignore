@@ -1,0 +1,37 @@
+# Runtime storage & data
+storage/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.env
+
+# Local Docker & build overrides
+docker-compose.override.yml
+backend/trip/constraints.txt
+
+# Python caches & virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Frontend builds & dev proxy
+**/node_modules/
+dist/
+**/dist/
+.angular/
+**/.angular/
+src/proxy.conf.json
+npm-debug.log*
+
+# OS & Editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
