@@ -182,6 +182,7 @@
     "find_nearby": "Find nearby places (Google API)",
     "nothing_to_see": "Nothing to see",
     "quick_filters": "Quick Filters",
+    "hidden": "Hidden",
     "select_all": "Select all",
     "set_current": "Set Current",
     "show_out_of_bounds": "Hide out-of-bounds places",
@@ -456,7 +457,8 @@
       "place_hint": "Supports google.com/maps/place/ and [https://maps.app.goo.gl](https://maps.app.goo.gl) (Google API Key required)",
       "query_tooltip": "Complete using Provider API",
       "toilets": "Toilets",
-      "visited": "Visited"
+      "visited": "Visited",
+      "hidden": "Hidden"
     },
     "places": {
       "empty": {
@@ -543,6 +545,10 @@
     "mark_not_favorite": "Mark not favorite",
     "mark_not_visited": "Mark not visited",
     "mark_visited": "Mark as visited",
+    "hide_place": "Hide place",
+    "unhide_place": "Unhide place",
+    "share_place": "Share place",
+    "link_copied": "Link copied to clipboard",
     "no": "No",
     "open_navigation": "Open in Navigation",
     "place": "Place",
@@ -573,6 +579,8 @@
     "allow_registration": "Allow users to self-register",
     "always_display_visited": "Show Visited Places",
     "always_display_visited_desc": "Always display visited places as small dots",
+    "minimize_hidden": "Show Hidden Places as Dots",
+    "minimize_hidden_desc": "Display hidden places as small dots instead of hiding them completely",
     "api_key": "TRIP API Key",
     "api_key_desc": "Use it to authenticate in scripts",
     "apprise_webhook": "Apprise Webhook",

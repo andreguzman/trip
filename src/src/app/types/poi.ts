@@ -29,6 +29,7 @@ export interface Place {
   duration?: number;
   allowdog?: boolean;
   visited?: boolean;
+  hidden?: boolean;
   favorite?: boolean;
   restroom?: boolean;
   links?: (string | LinkItem)[] | null;

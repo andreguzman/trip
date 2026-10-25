@@ -182,6 +182,7 @@
     "find_nearby": "Trova luoghi vicini (Google API)",
     "nothing_to_see": "Niente da mostrare",
     "quick_filters": "Filtri rapidi",
+    "hidden": "Nascosti",
     "select_all": "Seleziona tutto",
     "set_current": "Imposta come corrente",
     "show_out_of_bounds": "Nascondi luoghi fuori dai limiti",
@@ -456,7 +457,8 @@
       "place_hint": "Supporta google.com/maps/place/ e [https://maps.app.goo.gl](https://maps.app.goo.gl) (Richiede chiave API di Google)",
       "query_tooltip": "Completa usando l'API del fornitore",
       "toilets": "Bagni pubblici",
-      "visited": "Visitato"
+      "visited": "Visitato",
+      "hidden": "Nascosto"
     },
     "places": {
       "empty": {
@@ -543,6 +545,10 @@
     "mark_not_favorite": "Rimuovi dai preferiti",
     "mark_not_visited": "Segna come non visitato",
     "mark_visited": "Segna come visitato",
+    "hide_place": "Nascondi luogo",
+    "unhide_place": "Mostra luogo",
+    "share_place": "Condividi luogo",
+    "link_copied": "Link negli appunti",
     "no": "No",
     "open_navigation": "Apri nel navigatore",
     "place": "Luogo",
@@ -573,6 +579,8 @@
     "allow_registration": "Consenti agli utenti di registrarsi autonomamente",
     "always_display_visited": "Mostra luoghi visitati",
     "always_display_visited_desc": "Mostra sempre i luoghi visitati come piccoli punti",
+    "minimize_hidden": "Mostra luoghi nascosti come punti",
+    "minimize_hidden_desc": "Mostra i luoghi nascosti come piccoli punti invece di nasconderli completamente",
     "api_key": "Chiave API di TRIP",
     "api_key_desc": "Utilizzala per autenticarti negli script",
     "apprise_webhook": "Apprise Webhook",

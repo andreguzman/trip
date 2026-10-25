@@ -416,6 +416,7 @@ async def update_place(
     allowdog: bool | None = None,
     favorite: bool | None = None,
     visited: bool | None = None,
+    hidden: bool | None = None,
     restroom: bool | None = None,
     links: list[str] | None = None,
 ) -> dict:
@@ -444,6 +445,8 @@ async def update_place(
         data["favorite"] = favorite
     if visited is not None:
         data["visited"] = visited
+    if hidden is not None:
+        data["hidden"] = hidden
     if restroom is not None:
         data["restroom"] = restroom
     if links is not None:

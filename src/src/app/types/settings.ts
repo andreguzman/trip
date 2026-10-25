@@ -14,6 +14,7 @@ export interface Settings {
   google_apikey?: boolean | null;
   apprise_webhook_url?: boolean | null;
   mode_display_visited?: boolean;
+  mode_minimize_hidden?: boolean;
   mode_map_position?: boolean;
   show_dog_tag?: boolean;
   fetch_link_titles?: boolean;

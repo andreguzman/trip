@@ -67,8 +67,8 @@ Sorry for the inconvenience, I'm affected by this too, and it's out of TRIP scop
 - **GPX Indication**:
   Disabled by default. When enabled, an icon appears in the place bubble if a GPX file is associated to that place.
 
-- **Show Visited Places**:
-  Disabled by default, always display visited places as small dots.
+- **Show Hidden Places as Dots**:
+  Disabled by default. When enabled, hidden places are displayed as small dots instead of being removed from the map.
 
 - **Store Map Position**:
   Disabled by default, encode map position in the URL to restore the same view on refresh.

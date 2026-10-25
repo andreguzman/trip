@@ -122,6 +122,7 @@
   "dashboard": {
     "title": "Filtros",
     "quick_filters": "Filtros Rápidos",
+    "hidden": "Ocultos",
     "favorites": "Favoritos",
     "show_out_of_bounds": "Ocultar lugares fora dos limites",
     "nothing_to_see": "Nada para ver",
@@ -199,6 +200,8 @@
     "link_titles_desc": "Buscar e exibir o título da página de cada link em vez da URL bruta",
     "always_display_visited": "Mostrar locais visitados",
     "always_display_visited_desc": "Sempre exibir locais visitados como pequenos pontos",
+    "minimize_hidden": "Mostrar lugares ocultos como pontos",
+    "minimize_hidden_desc": "Exibir lugares ocultos como pequenos pontos em vez de ocultá-los completamente",
     "currency_desc": "Atualizar a moeda padrão",
     "duplicate_dist": "Limite de distância para duplicatas",
     "duplicate_dist_desc": "Controla o quão semelhantes os textos devem ser. Valores maiores aceitam mais diferenças; use 0 para desativar",
@@ -667,7 +670,8 @@
       "place_hint": "Suporta google.com/maps/place/ e [https://maps.app.goo.gl](https://maps.app.goo.gl) (Google API Key necessária)",
       "query_tooltip": "Completar usando a API do provedor",
       "toilets": "Banheiros",
-      "visited": "Visitados"
+      "visited": "Visitados",
+      "hidden": "Oculto"
     },
     "places": {
       "empty": {
@@ -758,6 +762,10 @@
     "open_navigation": "Abrir na Navegação",
     "fly_to_place": "Voar para o lugar",
     "mark_visited": "Marcar como visitado",
+    "hide_place": "Ocultar lugar",
+    "unhide_place": "Mostrar lugar",
+    "share_place": "Compartilhar lugar",
+    "link_copied": "Link copiado para a área de transferência",
     "mark_not_visited": "Marcar como não visitado",
     "mark_favorite": "Marcar como favorito",
     "mark_not_favorite": "Marcar como não favorito",
